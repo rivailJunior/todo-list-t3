@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { type AppType } from "next/app";
 
 import { trpc } from "../utils/trpc";

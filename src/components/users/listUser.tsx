@@ -1,14 +1,14 @@
-import type { Example } from "@prisma/client";
+import type { Users } from "@prisma/client";
 import React, { useContext } from "react";
 import { ListContext } from "../../context/listContext";
 
 type TListUsers = {
-  data: Example[] | undefined;
+  data: Users[] | undefined;
 };
 export function ListUsers({ data }: TListUsers) {
   const { setOpen, setUser } = useContext(ListContext);
 
-  const handleOnDeleteUser = (user: Example) => {
+  const handleOnDeleteUser = (user: Users) => {
     setUser(user);
     setOpen(true);
   };

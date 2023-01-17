@@ -1,10 +1,12 @@
-import { Example } from "@prisma/client";
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/ban-types */
+import { Users } from "@prisma/client";
 import React, { useState } from "react";
 
 type TListContext = {
   open: boolean;
   setOpen: Function;
-  user: Example | null;
+  user: Users | null;
   setUser: Function;
 };
 
