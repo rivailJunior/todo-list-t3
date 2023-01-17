@@ -1,12 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# ESLint is a tool for identifying and reporting on patterns
-# found in ECMAScript/JavaScript code.
-# More details at https://github.com/eslint/eslint
-# and https://eslint.org
-
 name: ESLint
 
 on:
@@ -31,7 +22,7 @@ jobs:
         with:
           node-version: 16
 
-       - name: 📥 Download deps
+      - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
