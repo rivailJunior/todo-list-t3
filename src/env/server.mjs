@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // @ts-check
 /**
  * This file is included in `/next.config.mjs` which ensures the app isn't built with invalid env vars.
@@ -7,6 +6,7 @@
 import { serverSchema } from "./schema.mjs";
 import { env as clientEnv, formatErrors } from "./client.mjs";
 
+// eslint-disable-next-line no-undef
 const _serverEnv = serverSchema.safeParse(process.env);
 
 if (!_serverEnv.success) {
