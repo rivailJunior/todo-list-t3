@@ -13,5 +13,8 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  env: {
+    DATABASE_URL: "",
+  },
 };
 export default config;
