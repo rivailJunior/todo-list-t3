@@ -6,9 +6,10 @@ import { Modal } from "../shared";
 
 type TListUsers = {
   data: Users[] | undefined;
+  isLoading: boolean;
 };
 
-export function ListUsers({ data }: TListUsers) {
+export function ListUsers({ data, isLoading = false }: TListUsers) {
   const { setOpen, open, setUser, user } = useContext(ListContext);
   const ctx = trpc.useContext();
   const { mutate: mutateDelete } = trpc.users.removeUser.useMutation({
@@ -92,6 +93,11 @@ export function ListUsers({ data }: TListUsers) {
               </li>
             );
           })}
+          {isLoading && (
+            <li className="mt-2 border-b border-solid border-gray-500 bg-white p-1 font-mono text-lg font-bold text-gray-700">
+              Loading...
+            </li>
+          )}
         </ul>
       </div>
     </>

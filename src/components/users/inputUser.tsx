@@ -2,18 +2,25 @@ import React, { useContext, useState, useEffect } from "react";
 import { ListContext } from "../../context/listContext";
 import { trpc } from "../../utils/trpc";
 
+const PRIMARY_BUTTON =
+  "bg-blue-500 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-400";
+const DISABLED_BUTTON =
+  "bg-gray-200 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-100 text-black";
+
 export function InputUser() {
   const [name, setName] = useState("");
   const { user } = useContext(ListContext);
   const ctx = trpc.useContext();
 
-  const { mutate: mutateAdd, isLoading } = trpc.users.addNewUser.useMutation({
-    onSuccess: () => ctx.invalidate(),
-  });
+  const { mutate: mutateAdd, isLoading: isLoadingCreate } =
+    trpc.users.addNewUser.useMutation({
+      onSuccess: () => ctx.invalidate(),
+    });
 
-  const { mutate: mutateUpdate } = trpc.users.updateUser.useMutation({
-    onSuccess: () => ctx.invalidate(),
-  });
+  const { mutate: mutateUpdate, isLoading: isLoadingUpdate } =
+    trpc.users.updateUser.useMutation({
+      onSuccess: () => ctx.invalidate(),
+    });
 
   useEffect(() => {
     if (user?.name) {
@@ -66,10 +73,14 @@ export function InputUser() {
         />
         <div className="flex justify-end">
           <button
-            disabled={isLoading}
+            disabled={isLoadingCreate || isLoadingUpdate}
             onClick={user ? handleUpdateUser : handleCreateUser}
             type="submit"
-            className="bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className={
+              isLoadingCreate || isLoadingUpdate
+                ? DISABLED_BUTTON
+                : PRIMARY_BUTTON
+            }
           >
             {user ? "Update" : "Save"}
           </button>
