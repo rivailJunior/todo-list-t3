@@ -6,7 +6,8 @@ export function InputUser() {
   const [name, setName] = useState("");
   const { user } = useContext(ListContext);
   const ctx = trpc.useContext();
-  const { mutate, isLoading } = trpc.users.addNewUser.useMutation({
+
+  const { mutate: mutateAdd, isLoading } = trpc.users.addNewUser.useMutation({
     onSuccess: () => ctx.invalidate(),
   });
 
@@ -21,11 +22,10 @@ export function InputUser() {
   }, [user]);
 
   const handleCreateUser = (evt: any) => {
-    console.log("will create");
     evt.preventDefault();
     try {
       if (!name.length) throw "Type value";
-      mutate({ name: name.toUpperCase() });
+      mutateAdd({ name: name.toUpperCase() });
     } catch (error) {
       console.log("error create", error);
     } finally {
@@ -34,7 +34,6 @@ export function InputUser() {
   };
 
   const handleUpdateUser = (evt: any) => {
-    console.log("will update");
     evt.preventDefault();
     try {
       if (!name.length) throw "Type value";
