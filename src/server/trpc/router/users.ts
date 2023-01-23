@@ -28,6 +28,24 @@ export const usersRouter = router({
         },
       });
     }),
+  getUser: publicProcedure
+    .input(z.object({ name: z.string() }))
+    .mutation(async (req) => {
+      return await req.ctx.prisma.users.findFirst({
+        where: {
+          name: req.input?.name,
+        },
+      });
+    }),
+  getUsersByName: publicProcedure
+    .input(
+      z.object({ name: z.string().min(5, "Should time at least 5 characters") })
+    )
+    .query(async (req) => {
+      return await req.ctx.prisma.users.findMany({
+        where: { name: req.input?.name },
+      });
+    }),
   updateUser: publicProcedure
     .input(z.object({ name: z.string(), id: z.string() }))
     .mutation(async ({ ctx, input }) => {
