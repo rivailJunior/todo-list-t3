@@ -32,15 +32,14 @@ describe("tRPC Api routes", () => {
   });
 
   test("should delete one user properly", async () => {
-    const ctx = await createContextInner({});
-    const caller = appRouter.createCaller(ctx);
-    const foundUser = await caller.users.getUser({ name: "Rivail Santos" });
-    const userId = foundUser?.id;
+    const prismaMock = mockDeep<PrismaClient>();
+    const caller = appRouter.createCaller({ prisma: prismaMock });
+    prismaMock.users.delete.mockResolvedValue(mockResponse);
     const responseDelete = await caller.users.removeUser({
-      id: userId as string,
+      id: mockResponse.id,
     });
     expect(responseDelete).toMatchObject({
-      name: "Rivail Santos",
+      name: "Jhon Doe",
     });
   });
 
