@@ -51,14 +51,8 @@ jobs:
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
-          with:
-          useLockFile: false
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
         with:
-          node-version: 16
-
+          useLockFile: false
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
@@ -77,8 +71,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
         with:
-          useLockFIle: false
+          useLockFile: false
 
       - name: Running test
         users: npm run test
