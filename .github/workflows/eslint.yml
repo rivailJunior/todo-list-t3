@@ -78,4 +78,4 @@ jobs:
           useLockFile: false
 
       - name: Running test
-        users: npm run test
+        run: npm run test
