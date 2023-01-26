@@ -1,5 +1,8 @@
 name: ESLint
 
+env:
+  DATABASE_URL: ${{vars.DATABASE_URL}}
+
 on:
   push:
     branches: ["main"]
@@ -79,5 +82,3 @@ jobs:
 
       - name: Running test
         run: npm run test
-        env:
-          DATABASE_URL: file:./db.sqlite
