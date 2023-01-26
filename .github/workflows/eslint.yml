@@ -79,3 +79,5 @@ jobs:
 
       - name: Running test
         run: npm run test
+        env:
+          DATABASE_URL: file:./db.sqlite
