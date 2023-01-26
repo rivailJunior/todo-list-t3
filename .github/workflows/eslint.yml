@@ -50,15 +50,15 @@ jobs:
           node-version: 16
 
       - name: 📥 Download deps
-        - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: bahmutov/npm-install@v1
+          with:
+          useLockFile: false
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-        with:
-          useLockFile: false
+
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
