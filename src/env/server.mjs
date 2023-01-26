@@ -7,6 +7,8 @@ import { serverSchema } from "./schema.mjs";
 import { env as clientEnv, formatErrors } from "./client.mjs";
 
 // eslint-disable-next-line no-undef
+console.log("variables", process.env);
+// eslint-disable-next-line no-undef
 const _serverEnv = serverSchema.safeParse(process.env);
 
 if (!_serverEnv.success) {
