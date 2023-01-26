@@ -1,7 +1,7 @@
 name: ESLint
 
 env:
-  DATABASE_URL: ${{vars.DATABASE_URL}}
+  DATABASE_URL: $DATABASE_URL
 
 on:
   push:
