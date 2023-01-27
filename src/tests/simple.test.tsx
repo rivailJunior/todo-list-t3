@@ -18,7 +18,7 @@ describe("tRPC Api routes", () => {
     prismaMock.users.create.mockResolvedValue(mockResponse);
     const example = await caller.users.addNewUser(mockResponse);
     expect(example).toMatchObject({
-      name: "Jhon Doe",
+      name: "Jhon Doe hahahah",
     });
   });
 
@@ -47,7 +47,7 @@ describe("tRPC Api routes", () => {
     const ctx = await createContextInner({});
     const caller = appRouter.createCaller(ctx);
     await expect(
-      caller.users.getUsersByName({ name: "testando user" })
+      caller.users.getUsersByName({ name: "t" })
     ).rejects.toThrowError();
   });
 
