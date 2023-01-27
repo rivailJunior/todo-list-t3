@@ -85,13 +85,18 @@ jobs:
 
   Deploy-Production:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
+        if: ${{ success() }}
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
+        if: ${{ success() }}
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
+        if: ${{ success() }}
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
+        if: ${{ success() }}
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
