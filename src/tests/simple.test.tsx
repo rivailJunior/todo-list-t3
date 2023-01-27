@@ -47,7 +47,7 @@ describe("tRPC Api routes", () => {
     const ctx = await createContextInner({});
     const caller = appRouter.createCaller(ctx);
     await expect(
-      caller.users.getUsersByName({ name: "t" })
+      caller.users.getUsersByName({ name: "testando user" })
     ).rejects.toThrowError();
   });
 
