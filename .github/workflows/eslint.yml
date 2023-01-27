@@ -3,6 +3,8 @@ name: ESLint
 env:
   DATABASE_URL: ${{ vars.DATABASE_URL }}
 
+runs-on: ubuntu-latest
+
 on:
   push:
     branches: ["main"]
@@ -16,7 +18,6 @@ permissions:
 jobs:
   lint:
     name: ⬣ ESLint
-    runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -39,7 +40,6 @@ jobs:
 
   typecheck:
     name: ʦ TypeScript
-    runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -62,7 +62,6 @@ jobs:
 
   tests:
     name: Unit tests
-    runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
@@ -85,7 +84,6 @@ jobs:
 
   Deploy-Production:
     needs: [tests]
-    runs-on: ubuntu-latest
     if: ${{ success() }}
     steps:
       - uses: actions/checkout@v2
