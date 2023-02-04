@@ -1,7 +1,7 @@
 name: ESLint
 
 env:
-  DATABASE_URL: ${{ vars.DATABASE_URL }}
+  DATABASE_URL: postgres://postgres:rivail27071988@db.kfmfwquvarfiprdgfibw.supabase.co:6543/postgres?pgbouncer=true
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
