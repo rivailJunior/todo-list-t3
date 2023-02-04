@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { ListContext } from "../../context/listContext";
 import { trpc } from "../../utils/trpc";
 import * as z from "zod";
