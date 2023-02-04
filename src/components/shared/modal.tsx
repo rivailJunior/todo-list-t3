@@ -1,8 +1,9 @@
+import react from "react";
 type TModal = {
   setOpen: () => void;
   open: boolean;
   title: string;
-  subTitle: string;
+  subTitle: string | react.ReactNode;
   actionButton: () => void;
 };
 export function Modal({
@@ -51,7 +52,7 @@ export function Modal({
                     {title}
                   </h3>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">{subTitle}</p>
+                    <div className="text-sm text-gray-500">{subTitle}</div>
                   </div>
                 </div>
               </div>

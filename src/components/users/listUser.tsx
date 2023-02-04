@@ -34,8 +34,15 @@ export function ListUsers({ data, isLoading = false }: TListUsers) {
       <Modal
         setOpen={() => setOpen(false)}
         open={open}
-        title={`Exluindo Usuário`}
-        subTitle={`Voce tem certeza que deseja excluir user: ${user?.name.toUpperCase()}?`}
+        title={`Deleting User`}
+        subTitle={
+          <div>
+            Are you sure, do you want to delete user:
+            <span className="ml-1 font-bold capitalize text-red-400">
+              {user?.name}?
+            </span>
+          </div>
+        }
         actionButton={handleDeleteUser}
       />
 
@@ -44,11 +51,11 @@ export function ListUsers({ data, isLoading = false }: TListUsers) {
           {data?.map((user, index) => {
             return (
               <li
-                className="mt-2 border-b border-solid border-gray-500 bg-white p-1 font-mono text-lg font-bold text-gray-700"
+                className="mt-2 border-b border-solid border-gray-500 bg-white p-1 text-lg font-light  text-gray-700"
                 key={index}
               >
                 <div className="flex flex-row justify-between p-3">
-                  <div>{user.name}</div>
+                  <div className="capitalize">{user.name}</div>
                   <div>
                     <button
                       className=" text-blue-600"
@@ -94,7 +101,7 @@ export function ListUsers({ data, isLoading = false }: TListUsers) {
             );
           })}
           {isLoading && (
-            <li className="mt-2 border-b border-solid border-gray-500 bg-white p-1 font-mono text-lg font-bold text-gray-700">
+            <li className="mt-2 border-b border-solid border-gray-500 bg-white p-1 text-lg font-light text-gray-700">
               Loading...
             </li>
           )}
