@@ -1,5 +1,8 @@
 name: Playwright Tests
 
+env:
+  DATABASE_URL: ${{ vars.DATABASE_URL }}
+
 on:
   push:
     branches: [main]
