@@ -83,7 +83,7 @@ jobs:
           useLockFile: false
 
       - name: Running test
-        run: npm run test
+        run: npm run test:unit
 
   build-deploy:
     needs: [tests]
