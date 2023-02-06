@@ -5,8 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
-  test:
+  test-e2e:
+    name: E2E
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
