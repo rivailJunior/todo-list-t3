@@ -58,7 +58,9 @@ export function ListUsers({ data, isLoading = false }: TListUsers) {
                   <div className="capitalize">{user.name}</div>
                   <div>
                     <button
-                      className=" text-blue-600"
+                      name="action_edit"
+                      value={user.name}
+                      className="text-blue-600"
                       onClick={() => setUser(user)}
                     >
                       <svg
@@ -77,6 +79,8 @@ export function ListUsers({ data, isLoading = false }: TListUsers) {
                       </svg>
                     </button>
                     <button
+                      name="action_delete"
+                      value={user.name}
                       className="ml-3 text-red-600"
                       onClick={() => handleOnDeleteUser(user)}
                     >

@@ -1,7 +1,7 @@
 // <reference types="vitest" />
 // <reference types="vite/client" />
 
-import { defineConfig } from "vitest/config";
+import { defineConfig, configDefaults } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
@@ -11,6 +11,7 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./setupTest.ts"],
+    exclude: [...configDefaults.exclude, "**/tests-e2e/**"],
     coverage: {
       reporter: ["text", "json", "html"],
     },
