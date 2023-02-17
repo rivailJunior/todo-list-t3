@@ -1,37 +1,26 @@
 import React, { useContext, useEffect } from "react";
 import { ListContext } from "../../context/listContext";
-import { trpc } from "../../utils/trpc";
-import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { formSchema, FormSchema, IInputUser } from "./usersTypes";
 
 const PRIMARY_BUTTON =
   "bg-blue-500 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-400";
 const DISABLED_BUTTON =
   "bg-gray-200 bottom-0 right-0 mt-2 inline-flex w-1/4 justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-100 text-black";
 
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(5, { message: "Minimum characters is 5" })
-    .max(30, { message: "Maximum characters is 30" }),
-});
-
-type Schema = z.infer<typeof formSchema>;
-
-export function InputUser() {
+export function InputUser({ mutateAdd, mutateUpdate, isLoading }: IInputUser) {
   const {
     handleSubmit,
     register,
     reset: resetForm,
     setValue,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(formSchema),
+  } = useForm<FormSchema["create"]>({
+    resolver: zodResolver(formSchema.pick({ name: true })),
   });
 
   const { user, setUser } = useContext(ListContext);
-  const ctx = trpc.useContext();
 
   useEffect(() => {
     if (user?.name.length) {
@@ -39,17 +28,7 @@ export function InputUser() {
     }
   }, [user]);
 
-  const { mutate: mutateAdd, isLoading: isLoadingCreate } =
-    trpc.users.addNewUser.useMutation({
-      onSuccess: () => ctx.invalidate(),
-    });
-
-  const { mutate: mutateUpdate, isLoading: isLoadingUpdate } =
-    trpc.users.updateUser.useMutation({
-      onSuccess: () => ctx.invalidate(),
-    });
-
-  const handleCreateUser = (data: Schema) => {
+  const handleCreateUser = (data: FormSchema["create"]) => {
     try {
       mutateAdd({ name: data.name });
     } catch (error) {
@@ -60,7 +39,7 @@ export function InputUser() {
     }
   };
 
-  const handleUpdateUser = (data: Schema) => {
+  const handleUpdateUser = (data: FormSchema["create"]) => {
     try {
       mutateUpdate({ id: user?.id as string, name: data.name });
     } catch (error) {
@@ -71,7 +50,8 @@ export function InputUser() {
     }
   };
 
-  const onHandleSubmit = (data: Schema) => {
+  const onHandleSubmit = (data: FormSchema["create"]) => {
+    console.log("handle update");
     user ? handleUpdateUser(data) : handleCreateUser(data);
   };
 
@@ -99,13 +79,9 @@ export function InputUser() {
           )}
           <div className="flex justify-end ">
             <button
-              disabled={isLoadingCreate || isLoadingUpdate}
+              disabled={isLoading}
               type="submit"
-              className={
-                isLoadingCreate || isLoadingUpdate
-                  ? DISABLED_BUTTON
-                  : PRIMARY_BUTTON
-              }
+              className={isLoading ? DISABLED_BUTTON : PRIMARY_BUTTON}
             >
               {user ? "Update" : "Save"}
             </button>

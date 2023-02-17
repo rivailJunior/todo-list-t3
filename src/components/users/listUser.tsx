@@ -1,15 +1,11 @@
-import type { Users } from "@prisma/client";
+import { Users } from "@prisma/client";
 import React, { useContext } from "react";
 import { ListContext } from "../../context/listContext";
 import { trpc } from "../../utils/trpc";
 import { Modal } from "../shared";
+import { IListUsers } from "./usersTypes";
 
-type TListUsers = {
-  data: Users[] | undefined;
-  isLoading: boolean;
-};
-
-export function ListUsers({ data, isLoading = false }: TListUsers) {
+export function ListUsers({ data, isLoading }: IListUsers) {
   const { setOpen, open, setUser, user } = useContext(ListContext);
   const ctx = trpc.useContext();
   const { mutate: mutateDelete } = trpc.users.removeUser.useMutation({

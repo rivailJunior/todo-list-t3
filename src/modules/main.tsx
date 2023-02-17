@@ -4,11 +4,25 @@ import { InputUser, ListUsers } from "../components/users";
 import { trpc } from "../utils/trpc";
 
 export default function Main() {
-  const { data, isFetching } = trpc.users.getAll.useQuery();
+  const { data } = trpc.users.getAll.useQuery();
+  const ctx = trpc.useContext();
+  const { mutate: mutateAdd, isLoading: isLoadingCreate } =
+    trpc.users.addNewUser.useMutation({
+      onSuccess: () => ctx.invalidate(),
+    });
+  const { mutate: mutateUpdate, isLoading: isLoadingUpdate } =
+    trpc.users.updateUser.useMutation({
+      onSuccess: () => ctx.invalidate(),
+    });
+
   return (
     <>
-      <InputUser />
-      <ListUsers data={data} isLoading={isFetching} />
+      <InputUser
+        isLoading={isLoadingCreate || isLoadingUpdate}
+        mutateAdd={mutateAdd}
+        mutateUpdate={mutateUpdate}
+      />
+      <ListUsers isLoading={isLoadingCreate || isLoadingUpdate} data={data} />
     </>
   );
 }
