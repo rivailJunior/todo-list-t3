@@ -1,8 +1,9 @@
 import React from "react";
-import { InputUser, ListUsers } from "../components/users";
-import { trpc } from "../utils/trpc";
+import { TimeLine } from "../../components/timeLineUsers";
+import { InputUser } from "../../components/users";
+import { trpc } from "../../utils/trpc";
 
-export default function Main() {
+export default function Main(props) {
   const { data } = trpc.users.getAll.useQuery();
   const ctx = trpc.useContext();
   const { mutate: mutateAdd, isLoading: isLoadingCreate } =
@@ -21,7 +22,7 @@ export default function Main() {
         mutateAdd={mutateAdd}
         mutateUpdate={mutateUpdate}
       />
-      <ListUsers isLoading={isLoadingCreate || isLoadingUpdate} data={data} />
+      <TimeLine users={data} />
     </>
   );
 }

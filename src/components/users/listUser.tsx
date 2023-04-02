@@ -1,29 +1,11 @@
-import { Users } from "@prisma/client";
-import React, { useContext } from "react";
-import { ListContext } from "../../context/listContext";
-import { trpc } from "../../utils/trpc";
+import React from "react";
+import useUser from "../../hook/users";
 import { Modal } from "../shared";
 import { IListUsers } from "./usersTypes";
 
 export function ListUsers({ data, isLoading }: IListUsers) {
-  const { setOpen, open, setUser, user } = useContext(ListContext);
-  const ctx = trpc.useContext();
-  const { mutate: mutateDelete } = trpc.users.removeUser.useMutation({
-    onSuccess: () => {
-      ctx.invalidate();
-      setUser(null);
-    },
-  });
-
-  const handleDeleteUser = () => {
-    mutateDelete({ id: user?.id as any });
-    setOpen(false);
-  };
-
-  const handleOnDeleteUser = (user: Users) => {
-    setUser(user);
-    setOpen(true);
-  };
+  const { setOpen, open, setUser, user, handleDeleteUser, handleOnDeleteUser } =
+    useUser();
 
   return (
     <>
