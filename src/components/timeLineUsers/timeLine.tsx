@@ -11,7 +11,7 @@ export default function TimeLine({ users }: { users: Users[] | undefined }) {
       <ol className="relative border-l border-gray-200 dark:border-gray-700">
         {users?.map((user: Users) => {
           return (
-            <li className="mb-10 ml-6">
+            <li className="mb-10 ml-6" key={`${user.updatedAt}`}>
               <span
                 onClick={() => handleOnDeleteUser(user)}
                 className="absolute -left-3 mt-3 flex h-6 w-6 items-center justify-center rounded-full bg-red-400  text-white ring-4 ring-white"
