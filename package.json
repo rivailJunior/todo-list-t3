@@ -22,10 +22,12 @@
     "@trpc/next": "^10.0.0",
     "@trpc/react-query": "^10.0.0",
     "@trpc/server": "^10.0.0",
+    "dayjs": "^1.11.7",
     "next": "13.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.0",
+    "react-icons": "^4.8.0",
     "superjson": "1.9.1",
     "zod": "^3.18.0"
   },
