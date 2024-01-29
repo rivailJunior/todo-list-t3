@@ -9,6 +9,7 @@ This project is created by using:
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
 - [Playwright](https://playwright.dev/)
+- [Vitest](https://vitest.dev/)
 
 ## How to Run
 
